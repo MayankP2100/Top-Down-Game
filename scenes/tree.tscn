@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bl3l5rsp5kde"]
+
+[ext_resource type="Texture2D" uid="uid://jj6i28c7i12g" path="res://assets/TX Plant.png" id="1_6uakm"]
+[ext_resource type="Texture2D" uid="uid://di3taewb1qb4b" path="res://assets/TX Shadow Plant.png" id="1_b071a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyhw6"]
+atlas = ExtResource("1_b071a")
+region = Rect2(0, 0, 170, 170)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rc8b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyhw6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs838"]
+atlas = ExtResource("1_6uakm")
+region = Rect2(18, 0, 123, 170)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efkv2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs838")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg2jn"]
+size = Vector2(14, 13)
+
+[node name="Tree" type="StaticBody2D"]
+texture_filter = 1
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.290196)
+position = Vector2(-1, 33)
+scale = Vector2(1.07647, 0.705882)
+sprite_frames = SubResource("SpriteFrames_3rc8b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visibility_layer = 2
+texture_filter = 1
+position = Vector2(4, -6)
+sprite_frames = SubResource("SpriteFrames_efkv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 57)
+shape = SubResource("RectangleShape2D_xg2jn")

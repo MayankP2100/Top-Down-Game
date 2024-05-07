@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://qp7mkp5ofyvl"]
+
+[ext_resource type="Texture2D" uid="uid://bkm4m50rik02d" path="res://assets/Torch_Red.png" id="1_667eb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f72u"]
+atlas = ExtResource("1_667eb")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqpfi"]
+atlas = ExtResource("1_667eb")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksu3u"]
+atlas = ExtResource("1_667eb")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdoa1"]
+atlas = ExtResource("1_667eb")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rm0o"]
+atlas = ExtResource("1_667eb")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p885k"]
+atlas = ExtResource("1_667eb")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygygd"]
+atlas = ExtResource("1_667eb")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mvrqr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f72u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqpfi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksu3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdoa1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rm0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p885k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygygd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcsbf"]
+size = Vector2(63, 66)
+
+[node name="Enemy" type="Area2D"]
+scale = Vector2(0.3, 0.441)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mvrqr")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.520533
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 1)
+shape = SubResource("RectangleShape2D_wcsbf")
