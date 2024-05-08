@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://qp7mkp5ofyvl"]
+[gd_scene load_steps=12 format=3 uid="uid://qp7mkp5ofyvl"]
 
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_75he2"]
 [ext_resource type="Texture2D" uid="uid://bkm4m50rik02d" path="res://assets/Torch_Red.png" id="1_667eb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f72u"]
@@ -64,6 +65,7 @@ size = Vector2(63, 66)
 
 [node name="Enemy" type="Area2D"]
 scale = Vector2(0.3, 0.441)
+script = ExtResource("1_75he2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mvrqr")
@@ -75,3 +77,5 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 1)
 shape = SubResource("RectangleShape2D_wcsbf")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
