@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cf6a6xnskqr71"]
+[gd_scene load_steps=30 format=3 uid="uid://cf6a6xnskqr71"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_xeb4p"]
 [ext_resource type="Texture2D" uid="uid://4sahfr1ry8wa" path="res://assets/Warrior_Blue.png" id="2_1rt1e"]
@@ -194,8 +194,11 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upl5n"]
+size = Vector2(98.4615, 126.667)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_x1tel"]
-radius = 17.9961
+radius = 56.8047
 
 [node name="Player" type="CharacterBody2D"]
 top_level = true
@@ -208,14 +211,29 @@ script = ExtResource("1_xeb4p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_j4bo8")
-animation = &"idle"
+animation = &"attack2"
 autoplay = "idle"
-frame_progress = 0.379692
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 17.8571)
-shape = SubResource("CircleShape2D_x1tel")
+frame = 5
+frame_progress = 1.0
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="SwordHitboxLeft" type="CollisionShape2D" parent="."]
+position = Vector2(-40, -10)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_upl5n")
+disabled = true
+
+[node name="SwordHitboxRight" type="CollisionShape2D" parent="."]
+position = Vector2(40, -10)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_upl5n")
+disabled = true
+
+[node name="CharacterHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(3.07692, 16.6667)
+scale = Vector2(0.325, 0.3)
+shape = SubResource("CircleShape2D_x1tel")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
