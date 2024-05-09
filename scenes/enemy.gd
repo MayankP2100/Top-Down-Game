@@ -2,8 +2,6 @@ extends Area2D
 
 
 @onready var player: CharacterBody2D = $'../Player'
-
-
 const MAX_HEALTH: float = 30.0
 var health: float
 
