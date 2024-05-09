@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://qp7mkp5ofyvl"]
+[gd_scene load_steps=13 format=3 uid="uid://qp7mkp5ofyvl"]
 
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_75he2"]
 [ext_resource type="Texture2D" uid="uid://bkm4m50rik02d" path="res://assets/Torch_Red.png" id="1_667eb"]
+[ext_resource type="AudioStream" uid="uid://duka0m2q60rne" path="res://assets/sound/punch1.mp3" id="3_viq38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wcsbf"]
 size = Vector2(63, 66)
@@ -79,4 +80,8 @@ autoplay = "idle"
 frame_progress = 0.520533
 flip_h = true
 
+[node name="Hit Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_viq38")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="Hit Sound" to="." method="_on_hit_sound_finished"]
