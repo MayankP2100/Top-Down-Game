@@ -80,8 +80,8 @@ autoplay = "idle"
 frame_progress = 0.520533
 flip_h = true
 
-[node name="Hit Sound" type="AudioStreamPlayer2D" parent="."]
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_viq38")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="finished" from="Hit Sound" to="." method="_on_hit_sound_finished"]
+[connection signal="finished" from="HitSound" to="." method="_on_hit_sound_finished"]

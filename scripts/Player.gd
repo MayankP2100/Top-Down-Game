@@ -9,15 +9,20 @@ signal DamageDealt(damage)
 @onready var attack_sound_1: AudioStreamPlayer2D = $AttackSound1
 @onready var attack_sound_2: AudioStreamPlayer2D = $AttackSound2
 @onready var attack_sound_3: AudioStreamPlayer2D = $AttackSound3
+@onready var run_sound: AudioStreamPlayer2D = $RunSound
 
 var rng = RandomNumberGenerator.new()
 var speed: float = 150.0
 var animation_lock = false
 var damage: float = 10.0;
 var is_attacking = false
+var is_running = false
 
 
 func _physics_process(delta):
+	if is_running:
+		run_sound.play()
+		
 	# Movement
 	var direction_x = Input.get_axis("left", "right")
 	var direction_y = Input.get_axis("up", "down")
@@ -35,8 +40,11 @@ func _physics_process(delta):
 	# Movement animation
 	if direction_x == 0 && direction_y == 0:
 		_change_animation("idle")
+		is_running = false
 	else:
 		_change_animation("run")
+		is_running = true
+			
 		if direction_x < 0:
 			animated_sprite_2d.flip_h = true
 
