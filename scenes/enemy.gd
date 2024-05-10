@@ -3,6 +3,8 @@ extends Area2D
 
 @onready var player: CharacterBody2D = $'../Player'
 @onready var hit_sound: AudioStreamPlayer2D = $'HitSound'
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 const MAX_HEALTH: float = 30.0
 var health: float
@@ -23,6 +25,7 @@ func take_damage(damage: float):
 
 func _on_body_entered(body: Node2D) -> void:
 	hit_sound.play()
+	animation_player.play("flash")
 
 
 func _on_hit_sound_finished() -> void:

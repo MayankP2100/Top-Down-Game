@@ -496,4 +496,4 @@ limit_smoothed = true
 position = Vector2(311, 69)
 
 [node name="Enemy" parent="." instance=ExtResource("5_uqpn4")]
-position = Vector2(290, 129)
+position = Vector2(281, 128)

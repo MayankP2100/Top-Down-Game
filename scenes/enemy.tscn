@@ -1,11 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://qp7mkp5ofyvl"]
+[gd_scene load_steps=18 format=3 uid="uid://qp7mkp5ofyvl"]
 
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_75he2"]
 [ext_resource type="Texture2D" uid="uid://bkm4m50rik02d" path="res://assets/Torch_Red.png" id="1_667eb"]
+[ext_resource type="Shader" path="res://scenes/enemy.gdshader" id="2_ye1lo"]
 [ext_resource type="AudioStream" uid="uid://duka0m2q60rne" path="res://assets/sound/punch1.mp3" id="3_viq38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wcsbf"]
 size = Vector2(63, 66)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yh7sv"]
+shader = ExtResource("2_ye1lo")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f72u"]
 atlas = ExtResource("1_667eb")
@@ -64,8 +70,69 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_xr3i2"]
+resource_name = "flash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [null, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 2.37842, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.44), Vector2(0.2, 0.293), Vector2(0.3, 0.44)]
+}
+
+[sub_resource type="Animation" id="Animation_lc0lr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.293)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rwrmt"]
+_data = {
+"RESET": SubResource("Animation_lc0lr"),
+"flash": SubResource("Animation_xr3i2")
+}
+
 [node name="Enemy" type="Area2D"]
-scale = Vector2(0.3, 0.441)
+scale = Vector2(0.3, 0.44)
 script = ExtResource("1_75he2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -73,6 +140,7 @@ position = Vector2(2.5, 1)
 shape = SubResource("RectangleShape2D_wcsbf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_yh7sv")
 position = Vector2(0, -1.35158e-07)
 sprite_frames = SubResource("SpriteFrames_mvrqr")
 animation = &"idle"
@@ -82,6 +150,12 @@ flip_h = true
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_viq38")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_rwrmt")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="finished" from="HitSound" to="." method="_on_hit_sound_finished"]

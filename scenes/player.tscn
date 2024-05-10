@@ -209,7 +209,7 @@ top_level = true
 light_mask = 17
 visibility_layer = 4
 texture_filter = 1
-scale = Vector2(0.325, 0.3)
+scale = Vector2(0.3, 0.277)
 script = ExtResource("1_xeb4p")
 
 [node name="Timer" type="Timer" parent="."]
@@ -228,6 +228,7 @@ disabled = true
 position = Vector2(3.07692, 16.6667)
 scale = Vector2(0.325, 0.3)
 shape = SubResource("CircleShape2D_x1tel")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
